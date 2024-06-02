@@ -161,8 +161,8 @@
                             
                             <!--Individual Products-->
                             {% for item in product_data %}
-                            <div class="product-item">
-                                <div class="product-details">
+                            <div class="product-item" style="margin: 20px auto; display: flex; flex-direction: column; align-items: center; width: 80%; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px; box-sizing: border-box;">
+                                <div class="product-details" style="text-align: center;">
                                     <h2>{{ item.product_name }}</h2>
                                     <p>{{ item.product_description }}</p>
                                     <div class="ratting">
@@ -173,18 +173,19 @@
                                         <i class="fa fa-star"></i>
                                     </div>
                                 </div>
-                                <div class="product-image-container" style="width: 200px; height: 200px; display: flex; justify-content: center; align-items: center; overflow: hidden;">
-                                    <a href="{% url 'checkout' item.id  %}">
+                                <div class="product-image-container" style="width: 300px; height: 300px; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+                                    <a href="{% url 'checkout' item.id %}">
                                         {% if item.product_image %}
-                                            <img src="{{ item.product_image.url }}" alt="Product Image" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                            <img src="{{ item.product_image.url }}" alt="Product Image" style="width: auto; height: 100%; max-width: 100%; object-fit: contain;"> <!-- Ensure the image fits within the container while maintaining aspect ratio -->
                                         {% else %}
-                                            <img src="{% static 'placeholder_image.jpg' %}" alt="Placeholder Image" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                            <img src="{% static 'placeholder_image.jpg' %}" alt="Placeholder Image" style="width: auto; height: 100%; max-width: 100%; object-fit: contain;">
                                         {% endif %}
                                     </a>
                                 </div>
                             </div>
                             {% endfor %}
 
+                            
                         </div>
                         
                         <!-- Pagination Start -->
@@ -207,26 +208,18 @@
                     </div>           
                     
                     <!-- Side Bar Start -->
-                    <div class="col-lg-4 sidebar" style="background-color: #000000;">
+                    <div class="col-lg-4 sidebar" style="background-color: whitesmoke;">
                         <div class="sidebar-widget category">
-                            <h2 class="title">Category</h2>
+                            <h2 class="title">Available Categories</h2>
                             <nav class="navbar" style="background-color: #000000;">
                                 <ul class="navbar-nav" >
+
+                                    <!--Review-->
+                                    {% for product in product_data %}
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-female"></i>Fashion & Beauty</a>
+                                        <a class="nav-link" href="{% url 'products' product.product_category %}"><i class="fa fa-female"></i> {{ product.product_name }} </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-child"></i>Kids & Babies Clothes</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-tshirt"></i>Men & Women Clothes</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-mobile-alt"></i>Gadgets & Accessories</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-microchip"></i>Electronics & Accessories</a>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </nav>
                         </div>
@@ -235,11 +228,8 @@
                         <div class="sidebar-widget widget-slider">
                             <div class="sidebar-slider normal-slider">
                                 {% for quality in quality_shelf %}
-                                    <div class="product-item">
-                                        <!-- Generate from Database -->
-                                        <!-- For tag -->
-                        
-                                        <div class="product-title">            
+                                    <div class="product-item" style="margin: 20px auto; display: flex; flex-direction: column; align-items: center; width: 80%; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px; box-sizing: border-box;">
+                                        <div class="product-title" style="text-align: center;">
                                             <a href="#">{{ quality.product_name }}</a>
                                             <div class="ratting">
                                                 <i class="fa fa-star"></i>
@@ -249,21 +239,21 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                         </div>
-                                        <div class="product-image">
+                                        <div class="product-image-container" style="width: 300px; height: 300px; display: flex; justify-content: center; align-items: center; overflow: hidden;">
                                             <a href="{% url 'checkout' quality.id %}">
                                                 {% if quality.product_image %}
-                                                    <img src="{{ quality.product_image.url }}" alt="Product Image">
+                                                    <img src="{{ quality.product_image.url }}" alt="Product Image" style="width: auto; height: 100%; max-width: 100%; object-fit: contain;"> <!-- Ensure the image fits within the container while maintaining aspect ratio -->
                                                 {% endif %}
                                             </a>
-                                            <div class="product-action">
-                                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                                <a href="#"><i class="fa fa-heart"></i></a>
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </div>
                                         </div>
-                                        <div class="product-price">
+                                        <div class="product-action" style="margin-top: 10px; text-align: center;">
+                                            <a href="#" style="margin-right: 10px;"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="#" style="margin-right: 10px;"><i class="fa fa-heart"></i></a>
+                                            <a href="#"><i class="fa fa-search"></i></a>
+                                        </div>
+                                        <div class="product-price" style="margin-top: 10px; text-align: center;">
                                             <h3><span>{{ quality.product_currency }}</span>{{ quality.product_price }}</h3>
-                                            <a class="btn" href="{% url 'checkout' quality.id %}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                            <a class="btn" href="{% url 'checkout' quality.id %}" style="margin-top: 10px;"><i class="fa fa-shopping-cart"></i> Buy Now</a>
                                         </div>
                                     </div>
                                 {% endfor %}

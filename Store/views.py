@@ -25,3 +25,12 @@ def checkout(request, pk):
         return render (request, 'checkout.html', {
             'shelf': shelf,
         })
+
+def product_list(request, product_name):
+    product = Product.objects.filter(product_category = product_name)
+
+    if product is not None:
+        context = {
+            'details': product,
+        }
+        return render (request, 'products.html', context)

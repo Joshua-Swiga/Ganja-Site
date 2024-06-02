@@ -21,7 +21,7 @@ class Quality_shelf(models.Model):
     product_price = models.IntegerField()
     product_currency = models.CharField(max_length=100)
     product_image = models.ImageField(upload_to='product_information/quality_shelf')
-    category = models.CharField(max_length=100)
+    category = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self) -> str:
         return f'{self.product_name}: {self.category}'
