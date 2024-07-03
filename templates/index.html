@@ -63,6 +63,19 @@
             </div>
         </div>
         
+
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item active">Product List</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
                 <!-- Nav Bar End -->      
         
         <!-- Bottom Bar Start -->
@@ -101,17 +114,6 @@
         </div>
         <!-- Bottom Bar End -->  
         
-        <!-- Breadcrumb Start -->
-        <div class="breadcrumb-wrap">
-            <div class="container-fluid">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Products</a></li>
-                    <li class="breadcrumb-item active">Product List</li>
-                </ul>
-            </div>
-        </div>
-        <!-- Breadcrumb End -->
         
         <!-- Product List Start -->
         <div class="product-view">
@@ -160,7 +162,7 @@
                             </div>
                             
                             <!--Individual Products-->
-                            {% for item in product_data %}
+                            {% for item in product_data|slice:":5" %}
                             <div class="product-item" style="margin: 20px auto; display: flex; flex-direction: column; align-items: center; width: 80%; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px; box-sizing: border-box;">
                                 <div class="product-details" style="text-align: center;">
                                     <h2>{{ item.product_name }}</h2>
